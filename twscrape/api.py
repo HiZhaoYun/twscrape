@@ -361,7 +361,7 @@ class API:
         op = OP_UserTweets
         kv = {
             "userId": str(uid),
-            "count": 40,
+            "count": 20,
             "includePromotedContent": True,
             "withQuickPromoteEligibilityTweetFields": True,
             "withVoice": True,
@@ -384,7 +384,7 @@ class API:
         op = OP_UserTweetsAndReplies
         kv = {
             "userId": str(uid),
-            "count": 40,
+            "count": 20,
             "includePromotedContent": True,
             "withCommunity": True,
             "withVoice": True,

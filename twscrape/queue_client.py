@@ -210,7 +210,7 @@ class QueueClient:
                 return None
 
             try:
-                rep = await ctx.clt.request(method, url, params=params)
+                rep = await ctx.clt.request(method, url, params=params, timeout=5)
                 setattr(rep, "__username", ctx.acc.username)
                 await self._check_rep(rep)
 
@@ -230,7 +230,8 @@ class QueueClient:
                 # if proxy missconfigured or ???
                 connection_retry += 1
                 if connection_retry >= 3:
-                    raise e
+                    # raise e
+                    return 
             except Exception as e:
                 unknown_retry += 1
                 if unknown_retry >= 3:
