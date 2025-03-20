@@ -231,7 +231,7 @@ class QueueClient:
                 connection_retry += 1
                 if connection_retry >= 3:
                     # raise e
-                    return 
+                    return
             except Exception as e:
                 unknown_retry += 1
                 if unknown_retry >= 3:
