@@ -210,7 +210,7 @@ class QueueClient:
                 return None
 
             try:
-                rep = await ctx.clt.request(method, url, params=params, timeout=5)
+                rep = await ctx.clt.request(method, url, params=params, timeout=httpx.Timeout(5.0, connect=5.0, read=5.0, write=5.0))
                 setattr(rep, "__username", ctx.acc.username)
                 await self._check_rep(rep)
 
