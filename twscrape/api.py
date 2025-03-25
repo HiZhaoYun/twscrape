@@ -101,7 +101,9 @@ class API:
         is_cur = cur is not None
         is_lim = lim > 0 and new_total >= lim
 
-        return rep if is_res else None, new_total, is_cur and not is_lim
+        # ⚠️
+        # return rep if is_res else None, new_total, is_cur and not is_lim
+        return rep if is_res else None, new_total, False
 
     def _get_cursor(self, obj: dict, cursor_type="Bottom") -> str | None:
         if cur := find_obj(obj, lambda x: x.get("cursorType") == cursor_type):
@@ -161,7 +163,7 @@ class API:
         op = OP_SearchTimeline
         kv = {
             "rawQuery": q,
-            "count": 20,
+            "count": 10,
             "product": "Latest",
             "querySource": "typed_query",
             **(kv or {}),
@@ -361,7 +363,7 @@ class API:
         op = OP_UserTweets
         kv = {
             "userId": str(uid),
-            "count": 20,
+            "count": 10,
             "includePromotedContent": True,
             "withQuickPromoteEligibilityTweetFields": True,
             "withVoice": True,
@@ -438,7 +440,7 @@ class API:
 
     async def list_timeline_raw(self, list_id: int, limit=-1, kv: KV = None):
         op = OP_ListLatestTweetsTimeline
-        kv = {"listId": str(list_id), "count": 20, **(kv or {})}
+        kv = {"listId": str(list_id), "count": 10, **(kv or {})}
         async with aclosing(self._gql_items(op, kv, limit=limit)) as gen:
             async for x in gen:
                 yield x
